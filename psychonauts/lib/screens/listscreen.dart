@@ -80,32 +80,40 @@ Widget _getListView()
                 children: <Widget>[
                  
                   Row(
-                    children: [
+                    children:<Widget> [
                       Column(
                         children: [
                           Container(
                         padding: EdgeInsets.symmetric(vertical: 4, horizontal: 6),
                         height: 144,
-                        width: 150,
+                        width: 130,
                         color: Colors.white,
                         alignment: Alignment.centerLeft,                         
                         child: Image.network(_Users[index].img),                        
                       )
                         ],
                       ),
-                      Column(children: [
+                      Column(children:<Widget> [
+                        
                         Row(
                           children: [
-                            Text(_Users[index].sId, style: TextStyle(fontSize: 16,color: Colors.green))
+                             Text("Genero: ", style: TextStyle(fontSize: 16,color: Colors.black,fontWeight: FontWeight.bold)),                        
+                            Text(_Users[index].gender, style: TextStyle(fontSize: 16,color: Colors.black,fontWeight: FontWeight.bold)),
+                            SizedBox(height: 30,),
                           ],                          
                         ),
+                        SizedBox(height: 10),
                         Row(
                           children: [
-                            Text(_Users[index].name, style: TextStyle(fontSize: 16,color: Colors.green))
+                            Text("Id: ", style: TextStyle(fontSize: 16,color: Colors.black,fontWeight: FontWeight.bold)),
+                            Text(_Users[index].sId, style: TextStyle(fontSize: 16,color: Colors.red,fontWeight: FontWeight.bold)),
+                            
                           ],                          
                         ),
+                        SizedBox(height: 10),
                         Row(children: [
-                          Text(_Users[index].gender, style: TextStyle(fontSize: 16,color: Colors.green))
+                          Text("Name: ", style: TextStyle(fontSize: 16,color: Colors.black,fontWeight: FontWeight.bold,fontFamily: 'RobotoMono' )),
+                          Text(_Users[index].name, style: TextStyle(fontSize: 16,color: Colors.grey,fontWeight: FontWeight.bold,fontFamily: 'RobotoMono' ))
                         ],)
                       ],)
                       

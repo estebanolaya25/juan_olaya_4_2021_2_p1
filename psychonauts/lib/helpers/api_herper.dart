@@ -18,7 +18,7 @@ class ApiHelper
     
     for(var item in data)
     {
-      data1.add(Psychonauts(gender: item["gender"], img: item["img"], iV: 0, name: item["name"], psiPowers: [], sId: item["_Id"]));
+      data1.add(Psychonauts(gender: item["gender"], img: item["img"], iV: 0, name: item["name"], psiPowers: [], sId: item["_id"]));
     }
     return Response(isSuccess: true,result: data1);
   }
