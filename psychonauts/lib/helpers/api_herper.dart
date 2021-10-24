@@ -23,4 +23,15 @@ class ApiHelper
     return Response(isSuccess: true,result: data1);
   }
 
+  static Future<Response> getUsers2() async {
+    
+    var url=Uri.parse('${Constans.apiUrl}/api/characters');
+    var response =await http.get(url);    
+    List<Psychonauts> data1=[];//=json.decode(response.body); 
+    final data=json.decode(response.body);
+    
+    
+    return Response(isSuccess: true,result: data);
+  }
+
 }

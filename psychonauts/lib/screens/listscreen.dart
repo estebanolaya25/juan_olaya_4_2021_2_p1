@@ -36,6 +36,8 @@ class _ListScreenState extends State<ListScreen> {
    if(response.result==null)
    {
     _isFiltered = false;
+   }else{
+     _noContent();
    }
 
    
@@ -53,8 +55,8 @@ Widget _noContent() {
         margin: EdgeInsets.all(20),
         child: Text(
           _isFiltered
-          ? 'No hay usuarios con ese criterio de búsqueda.'
-          : 'No hay usuarios registradas.',
+          ? 'Servicio No disponible'
+          : 'Servicio no disponible',
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold
@@ -69,6 +71,7 @@ Widget _getListView()
   return  Scaffold(
     appBar: AppBar(
       title: Text('Lista personajes'),
+      
     ),
     body: Column(  
       children: [

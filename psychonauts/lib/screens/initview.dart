@@ -1,10 +1,12 @@
 import 'dart:convert';
-
+import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:psychonauts/Models/Psychonauts.dart';
 import 'package:psychonauts/components/loader_component.dart';
 import 'package:psychonauts/helpers/constans.dart';
+import 'package:psychonauts/screens/try.dart';
 
 import 'listscreen.dart';
 class InitView extends StatefulWidget {
@@ -25,8 +27,10 @@ class _InitViewState extends State<InitView> {
             child: Column(
                mainAxisAlignment: MainAxisAlignment.center,
                children: <Widget>[
+                 _showLogoTitle(),
+                 SizedBox(height: 10),
                   _showLogo(),
-                SizedBox(height: 20,),
+                SizedBox(height: 20),
                _showButton()
                ],
             ),
@@ -40,6 +44,14 @@ class _InitViewState extends State<InitView> {
  Widget _showLogo() {
      return Image(
      image: AssetImage('assets/Psychonauts.jpg'),  
+      width: 300,
+      fit: BoxFit.fill,   
+     );
+  }
+
+  Widget _showLogoTitle() {
+     return Image(
+     image: AssetImage('assets/Psychonauts2.jpg'),  
       width: 300,
       fit: BoxFit.fill,   
      );
@@ -74,11 +86,28 @@ class _InitViewState extends State<InitView> {
   }
 
    _ConsultPsychonauts() async {
+
+var connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.none) {
+      setState(() {
+        _showLoader = false;
+      });
+      await showAlertDialog(
+        context: context,
+        title: 'Error', 
+        message: 'Verifica que estes conectado a internet.',
+        actions: <AlertDialogAction>[
+            AlertDialogAction(key: null, label: 'Aceptar'),
+        ]
+      );    
+      return;
+    }
+
     setState(() {
       _showLoader = true;
     });
 
-    var url=Uri.parse('${Constans.apiUrl}/api/characters');
+    /*var url=Uri.parse('${Constans.apiUrl}/api/characters');
     var response =await http.get(url);
     List<Psychonauts>data1=[];
     //List<dynamic> data=json.decode(response.body); 
@@ -87,16 +116,14 @@ class _InitViewState extends State<InitView> {
     for(var item in data)
     {
       data1.add(Psychonauts(gender: item["gender"], img: item["img"], iV: 0, name: item["name"], psiPowers: [], sId: item["img"]));
-    }
+    }*/
     
-    setState(() {
-      _showLoader = true;
-    });
+   
 
-    Navigator.pushReplacement(
+    Navigator.push(
       context, 
       MaterialPageRoute(
-        builder: (context) => ListScreen()
+        builder: (context) => Tryview()//ListScreen()
       )
     );
     
@@ -129,7 +156,7 @@ for (var item in data1)
       _showLoader = false;
     });
 
-    var body = response.body;
+   // var body = response.body;
 
 
 
