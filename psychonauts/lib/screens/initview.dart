@@ -31,7 +31,7 @@ class _InitViewState extends State<InitView> {
                  SizedBox(height: 10),
                   _showLogo(),
                 SizedBox(height: 20),
-               _showButton()
+               _showButton(),
                ],
             ),
           ),
@@ -72,14 +72,31 @@ class _InitViewState extends State<InitView> {
       ),
     );
   }
+  _showPsychonauts2() {
+    return Expanded(
+      child: ElevatedButton(
+        child: Text('Psychonauts'),
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.resolveWith<Color>(
+            (Set<MaterialState> states) {
+              return Color(0xFF120E43);
+            }
+          ),
+        ),
+        onPressed: () => _ConsultPsychonauts2(), 
+      ),
+    );
+  }
 
   _showButton() {
     return Container(
-      margin: EdgeInsets.only(left: 10, right: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+     
+      child: Row(        
         children: <Widget>[
           _showPsychonauts(),
+          SizedBox(height: 10),
+          //_showPsychonauts2(),
+
         ],
       ),
     );
@@ -123,7 +140,7 @@ var connectivityResult = await Connectivity().checkConnectivity();
     Navigator.push(
       context, 
       MaterialPageRoute(
-        builder: (context) => Tryview()//ListScreen()
+        builder: (context) => Tryview()//ListScreen()Tryview()
       )
     );
     
@@ -168,5 +185,40 @@ for (var item in data1)
         builder: (context) => HomeScreen(token: token,)
       )
     );*/
+  }
+  _ConsultPsychonauts2() async {
+
+var connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.none) {
+      setState(() {
+        _showLoader = false;
+      });
+      await showAlertDialog(
+        context: context,
+        title: 'Error', 
+        message: 'Verifica que estes conectado a internet.',
+        actions: <AlertDialogAction>[
+            AlertDialogAction(key: null, label: 'Aceptar'),
+        ]
+      );    
+      return;
+    }
+
+    setState(() {
+      _showLoader = true;
+    });
+    
+   
+
+    Navigator.push(
+      context, 
+      MaterialPageRoute(
+        builder: (context) => ListScreen()
+      )
+    ); 
+
+    setState(() {
+      _showLoader = false;
+    });   
   }
 }

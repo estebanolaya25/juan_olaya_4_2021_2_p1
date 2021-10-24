@@ -62,7 +62,11 @@ class _TryviewState extends State<Tryview> {
   }
 
  Widget _getListView() {
-   return ListView(
+   return Scaffold(
+      appBar: AppBar(
+      title: Text('Lista personajes'),      
+    ),
+    body: ListView(
       children: _Users
           .map(
             (item) => Column(children: <Widget>[
@@ -110,6 +114,7 @@ class _TryviewState extends State<Tryview> {
               
               //Mostar itemsSizedBox(height: 10),
               SizedBox(height: 10),
+              Text('Poderes:',style: TextStyle(fontSize: 17,color: Colors.black,fontWeight: FontWeight.bold,fontFamily: 'RobotoMono' )),
               Column(
                  
                   children: (item['psiPowers'] as List)
@@ -130,7 +135,14 @@ class _TryviewState extends State<Tryview> {
             ),
           )
           .toList(),
-    );
+    
+   )
+   );
  }
-
 }
+
+ 
+
+
+ 
+
