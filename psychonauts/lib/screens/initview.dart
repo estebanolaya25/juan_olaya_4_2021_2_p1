@@ -89,8 +89,7 @@ class _InitViewState extends State<InitView> {
   }
 
   _showButton() {
-    return Container(
-     
+    return Container(     
       child: Row(        
         children: <Widget>[
           _showPsychonauts(),
